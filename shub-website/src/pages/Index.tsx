@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import Navbar from "@/components/Navbar";
-import { Mail, Github, Linkedin, ArrowDown, Code2 } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
 import coderImage from "@/assets/coder.png";
 
@@ -287,6 +287,50 @@ const Index = () => {
                   <li>Provided group tutoring to a group of 20 students to reinforce learning concepts like object-oriented programming and help them follow good software practices</li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Resume Section */}
+      <section
+        id="resume"
+        className="py-20 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(10, 10, 30, 0.95), rgba(10, 10, 30, 0.95)), url(${cyberBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 to-amber-500/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">Resume</h2>
+            <p className="text-center text-orange-100/80 mb-8">
+              View or download my resume to learn more about my experience and qualifications
+            </p>
+
+            <div className="flex justify-center mb-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 shadow-glow"
+                asChild
+              >
+                <a href="/shubhams_resume.pdf" download="Shubham_Singh_Resume.pdf">
+                  <FileDown className="mr-2 h-5 w-5" />
+                  Download Resume
+                </a>
+              </Button>
+            </div>
+
+            {/* PDF Viewer */}
+            <div className="bg-card border border-border rounded-lg overflow-hidden shadow-2xl">
+              <iframe
+                src="/shubhams_resume.pdf"
+                className="w-full h-[800px]"
+                title="Shubham Singh Resume"
+              />
             </div>
           </div>
         </div>

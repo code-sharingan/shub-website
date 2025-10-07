@@ -73,6 +73,12 @@ const Navbar = () => {
               Experience
             </button>
             <button
+              onClick={() => scrollToSection('resume')}
+              className="text-cyan-100 hover:text-cyan-400 transition-colors"
+            >
+              Resume
+            </button>
+            <button
               onClick={() => scrollToSection('contact')}
               className="text-cyan-100 hover:text-cyan-400 transition-colors"
             >
@@ -151,6 +157,12 @@ const Navbar = () => {
                 className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
               >
                 Experience
+              </button>
+              <button
+                onClick={() => scrollToSection('resume')}
+                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
+              >
+                Resume
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
