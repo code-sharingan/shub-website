@@ -172,13 +172,13 @@ const Index = () => {
               title="FreedomLedger"
               description="Full-stack fintech application with Next.js 15/React 19 frontend and FastAPI backend, processing real-time financial data from Plaid API across 11,000+ institutions. Features advanced data visualization with D3.js, enterprise-grade security with Firebase Authentication, and comprehensive RESTful API architecture with 45+ endpoints."
               technologies={["Next.js", "React 19", "FastAPI", "PostgreSQL", "D3.js", "Firebase", "Plaid API"]}
-              githubUrl="https://github.com/code-sharingan"
+              githubUrl="https://github.com/code-sharingan/Freedomledger"
             />
             <ProjectCard
               title="Online Chat Application"
               description="Real-time chat application with React and Tailwind CSS frontend and FastAPI backend. Managed user authentication, real-time messaging, and database interactions efficiently with secure integration between frontend and backend through environment variables and CORS settings."
               technologies={["React", "Tailwind CSS", "FastAPI", "WebSockets"]}
-              githubUrl="https://github.com/code-sharingan"
+              githubUrl="https://github.com/code-sharingan/Chat"
             />
             <ProjectCard
               title="Agario Multiplayer Client"
