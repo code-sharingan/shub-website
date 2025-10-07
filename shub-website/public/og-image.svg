@@ -1,0 +1,68 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient definitions -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0f0f28;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a1e;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+
+    <radialGradient id="glow1" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0" />
+    </radialGradient>
+
+    <radialGradient id="glow2" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0" />
+    </radialGradient>
+
+    <radialGradient id="glow3" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Glowing circles for ambiance -->
+  <circle cx="200" cy="150" r="200" fill="url(#glow1)" opacity="0.4"/>
+  <circle cx="1000" cy="480" r="250" fill="url(#glow2)" opacity="0.4"/>
+  <circle cx="600" cy="315" r="180" fill="url(#glow3)" opacity="0.3"/>
+
+  <!-- Grid pattern for tech aesthetic -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="#06b6d4" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="415" x2="1200" y2="415" stroke="#a855f7" stroke-width="0.5" opacity="0.1"/>
+  <line x1="600" y1="0" x2="600" y2="630" stroke="#ec4899" stroke-width="0.5" opacity="0.1"/>
+
+  <!-- Main text content -->
+  <text x="600" y="280" font-family="'Arial', 'Helvetica', sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="url(#textGradient)">
+    Shubham Singh
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="350" font-family="'Arial', 'Helvetica', sans-serif" font-size="40" text-anchor="middle" fill="#94a3b8">
+    Full-Stack Developer
+  </text>
+
+  <!-- Additional info -->
+  <text x="600" y="420" font-family="'Arial', 'Helvetica', sans-serif" font-size="28" text-anchor="middle" fill="#64748b">
+    Building scalable web applications
+  </text>
+
+  <!-- Tech accent elements -->
+  <rect x="100" y="520" width="80" height="4" fill="#06b6d4" opacity="0.6" rx="2"/>
+  <rect x="200" y="520" width="120" height="4" fill="#a855f7" opacity="0.6" rx="2"/>
+  <rect x="340" y="520" width="60" height="4" fill="#ec4899" opacity="0.6" rx="2"/>
+
+  <rect x="1020" y="520" width="80" height="4" fill="#06b6d4" opacity="0.6" rx="2"/>
+  <rect x="880" y="520" width="120" height="4" fill="#a855f7" opacity="0.6" rx="2"/>
+  <rect x="800" y="520" width="60" height="4" fill="#ec4899" opacity="0.6" rx="2"/>
+</svg>
