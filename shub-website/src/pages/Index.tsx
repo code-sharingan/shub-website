@@ -4,6 +4,7 @@ import SkillBadge from "@/components/SkillBadge";
 import Navbar from "@/components/Navbar";
 import { Mail, Github, Linkedin, ArrowDown, Code2 } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
+import coderImage from "@/assets/coder.png";
 
 const Index = () => {
   const scrollToProjects = () => {
@@ -28,57 +29,70 @@ const Index = () => {
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10" />
-        
-        <div className="container mx-auto px-4 z-10 text-center">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Shubham Anil Singh
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Computer Science Graduate | Full-Stack Developer
-            </p>
-            <p className="text-lg text-muted-foreground/80 mb-12 max-w-xl mx-auto">
-              Building scalable full-stack applications with expertise in modern web frameworks,
-              cloud architectures, and real-time systems. Graduating December 2025.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 justify-center mb-12">
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 shadow-glow"
-                onClick={scrollToProjects}
-              >
-                <Code2 className="mr-2 h-5 w-5" />
-                View Projects
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-primary/50 hover:bg-primary/10"
-                onClick={scrollToContact}
-              >
-                <Mail className="mr-2 h-5 w-5" />
-                Get in Touch
-              </Button>
+
+        <div className="container mx-auto px-4 z-10">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 animate-fade-in">
+            {/* Image Section */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full opacity-75 blur-lg group-hover:opacity-100 transition duration-300"></div>
+              <img
+                src={coderImage}
+                alt="Shubham coding in a coffee shop"
+                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-background"
+              />
             </div>
 
-            <div className="flex gap-6 justify-center">
-              <a
-                href="https://github.com/code-sharingan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Github className="w-6 h-6" />
-              </a>
-              <a
-                href="https://linkedin.com/in/shubhamanilsingh"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
+            {/* Text Section */}
+            <div className="text-center md:text-left max-w-2xl">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+                Shubham Singh
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                Computer Science Graduate | Full-Stack Developer
+              </p>
+              <p className="text-lg text-muted-foreground/80 mb-12">
+                Building scalable full-stack applications with expertise in modern web frameworks,
+                cloud architectures, and real-time systems. Graduating December 2025.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 shadow-glow"
+                  onClick={scrollToProjects}
+                >
+                  <Code2 className="mr-2 h-5 w-5" />
+                  View Projects
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-primary/50 hover:bg-primary/10"
+                  onClick={scrollToContact}
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  Get in Touch
+                </Button>
+              </div>
+
+              <div className="flex gap-6 justify-center md:justify-start">
+                <a
+                  href="https://github.com/code-sharingan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Github className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/shubhamanilsingh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-accent transition-colors"
+                >
+                  <Linkedin className="w-6 h-6" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
