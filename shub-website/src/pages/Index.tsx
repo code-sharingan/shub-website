@@ -5,8 +5,20 @@ import Navbar from "@/components/Navbar";
 import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
 import coderImage from "@/assets/coder.png";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Index = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -28,82 +40,180 @@ const Index = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10" />
+        {/* Apple-style glassmorphism overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backdropFilter: 'saturate(180%) blur(2px)',
+            WebkitBackdropFilter: 'saturate(180%) blur(2px)',
+            background: 'rgba(255, 255, 255, 0.01)',
+          }}
+        />
+
+        {/* Animated gradient overlay */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10"
+          animate={{
+            background: [
+              'linear-gradient(to bottom right, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1))',
+              'linear-gradient(to bottom right, rgba(236, 72, 153, 0.1), rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))',
+              'linear-gradient(to bottom right, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1), rgba(6, 182, 212, 0.1))',
+              'linear-gradient(to bottom right, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1))',
+            ]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: [null, Math.random() * window.innerHeight],
+              x: [null, Math.random() * window.innerWidth],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        ))}
 
         <div className="container mx-auto px-4 z-10">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 animate-fade-in">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16">
             {/* Image Section */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full opacity-75 blur-lg group-hover:opacity-100 transition duration-300"></div>
-              <img
+            <motion.div
+              className="relative group"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+            >
+              <motion.div
+                className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full opacity-75 blur-lg group-hover:opacity-100 transition duration-300"
+                animate={{
+                  rotate: 360,
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              <motion.img
                 src={coderImage}
                 alt="Shubham coding in a coffee shop"
                 className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-background"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
               />
-            </div>
+            </motion.div>
 
             {/* Text Section */}
             <div className="text-center md:text-left max-w-2xl">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+              <motion.h1
+                className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 Shubham Singh
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+              </motion.h1>
+              <motion.p
+                className="text-xl md:text-2xl text-muted-foreground mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 Computer Science Graduate | Full-Stack Developer
-              </p>
-              <p className="text-lg text-muted-foreground/80 mb-12">
+              </motion.p>
+              <motion.p
+                className="text-lg text-muted-foreground/80 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
                 Building scalable full-stack applications with expertise in modern web frameworks,
                 cloud architectures, and real-time systems. Graduating December 2025.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 shadow-glow"
-                  onClick={scrollToProjects}
-                >
-                  <Code2 className="mr-2 h-5 w-5" />
-                  View Projects
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary/50 hover:bg-primary/10"
-                  onClick={scrollToContact}
-                >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Get in Touch
-                </Button>
-              </div>
+              <motion.div
+                className="flex flex-wrap gap-4 justify-center md:justify-start mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    size="lg"
+                    className="bg-primary hover:bg-primary/90 shadow-glow"
+                    onClick={scrollToProjects}
+                  >
+                    <Code2 className="mr-2 h-5 w-5" />
+                    View Projects
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary/50 hover:bg-primary/10"
+                    onClick={scrollToContact}
+                  >
+                    <Mail className="mr-2 h-5 w-5" />
+                    Get in Touch
+                  </Button>
+                </motion.div>
+              </motion.div>
 
-              <div className="flex gap-6 justify-center md:justify-start">
-                <a
+              <motion.div
+                className="flex gap-6 justify-center md:justify-start"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
+              >
+                <motion.a
                   href="https://github.com/code-sharingan"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <Github className="w-6 h-6" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://linkedin.com/in/shubhamanilsingh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-accent transition-colors"
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <Linkedin className="w-6 h-6" />
-                </a>
-              </div>
+                </motion.a>
+              </motion.div>
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
           <ArrowDown className="w-6 h-6 text-muted-foreground" />
-        </div>
+        </motion.div>
       </section>
 
       {/* Skills Section */}
-      <section
+      <motion.section
         id="skills"
         className="py-20 relative overflow-hidden"
         style={{
@@ -112,45 +222,64 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Skills & Technologies</h2>
-          <p className="text-center text-cyan-100/80 mb-12 max-w-2xl mx-auto">
+          <motion.h2
+            className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Skills & Technologies
+          </motion.h2>
+          <motion.p
+            className="text-center text-cyan-100/80 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Proficient in modern web technologies and frameworks
-          </p>
-          
-          <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto">
-            <SkillBadge name="Java" />
-            <SkillBadge name="C#" />
-            <SkillBadge name="C++" />
-            <SkillBadge name="Python" />
-            <SkillBadge name="JavaScript" />
-            <SkillBadge name="TypeScript" />
-            <SkillBadge name="React" />
-            <SkillBadge name="Next.js" />
-            <SkillBadge name="Vue.js" />
-            <SkillBadge name="Django" />
-            <SkillBadge name="Spring Boot" />
-            <SkillBadge name="FastAPI" />
-            <SkillBadge name="REST APIs" />
-            <SkillBadge name="PostgreSQL" />
-            <SkillBadge name="MySQL" />
-            <SkillBadge name="MongoDB" />
-            <SkillBadge name="AWS (EC2)" />
-            <SkillBadge name="Azure" />
-            <SkillBadge name="Firebase" />
-            <SkillBadge name="D3.js" />
-            <SkillBadge name="Tailwind CSS" />
-            <SkillBadge name="Git/GitHub" />
-            <SkillBadge name="Agile/Scrum" />
-            <SkillBadge name="TDD" />
-          </div>
+          </motion.p>
+
+          <motion.div
+            className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.05,
+                },
+              },
+            }}
+          >
+            {["Java", "C#", "C++", "Python", "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Django", "Spring Boot", "FastAPI", "REST APIs", "PostgreSQL", "MySQL", "MongoDB", "AWS (EC2)", "Azure", "Firebase", "D3.js", "Tailwind CSS", "Git/GitHub", "Agile/Scrum", "TDD"].map((skill, index) => (
+              <motion.div
+                key={skill}
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.8 },
+                  visible: { opacity: 1, y: 0, scale: 1 },
+                }}
+                transition={{ type: "spring", stiffness: 100 }}
+              >
+                <SkillBadge name={skill} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Section */}
-      <section
+      <motion.section
         id="projects"
         className="py-20 relative overflow-hidden"
         style={{
@@ -159,13 +288,31 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-pink-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Featured Projects</h2>
-          <p className="text-center text-purple-100/80 mb-12 max-w-2xl mx-auto">
+          <motion.h2
+            className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            className="text-center text-purple-100/80 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             A selection of my recent work and side projects
-          </p>
+          </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <ProjectCard
@@ -188,10 +335,10 @@ const Index = () => {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Education Section */}
-      <section
+      <motion.section
         id="education"
         className="py-20 relative overflow-hidden"
         style={{
@@ -200,12 +347,31 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-green-500/5 to-emerald-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">Education</h2>
-            <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
+            <motion.h2
+              className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Education
+            </motion.h2>
+            <motion.div
+              className="bg-card border border-border rounded-lg p-8 shadow-lg"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(52, 211, 153, 0.3)" }}
+            >
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
                   <h3 className="text-2xl font-bold text-foreground mb-2">University of Utah</h3>
@@ -231,13 +397,13 @@ const Index = () => {
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Human Computer Interaction</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Experience Section */}
-      <section
+      <motion.section
         id="experience"
         className="py-20 relative overflow-hidden"
         style={{
@@ -246,13 +412,32 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-cyan-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Experience</h2>
+            <motion.h2
+              className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Experience
+            </motion.h2>
             <div className="space-y-8">
-              <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
+              <motion.div
+                className="bg-card border border-border rounded-lg p-8 shadow-lg"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(56, 189, 248, 0.3)" }}
+              >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <div>
                     <h3 className="text-2xl font-bold text-foreground mb-1">Peer Mentor</h3>
@@ -268,9 +453,16 @@ const Index = () => {
                   <li>Guided students on major selection and career paths within the computing field</li>
                   <li>Collaborated with the mentorship program coordinator to revamp the program structure, resulting in significant increase in mentee engagement</li>
                 </ul>
-              </div>
+              </motion.div>
 
-              <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
+              <motion.div
+                className="bg-card border border-border rounded-lg p-8 shadow-lg"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(56, 189, 248, 0.3)" }}
+              >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <div>
                     <h3 className="text-2xl font-bold text-foreground mb-1">Teaching Assistant</h3>
@@ -286,14 +478,14 @@ const Index = () => {
                   <li>Collaborated with teachers to plan and implement lessons following the school's curriculum and objectives that contributed to a 15% retention rate</li>
                   <li>Provided group tutoring to a group of 20 students to reinforce learning concepts like object-oriented programming and help them follow good software practices</li>
                 </ul>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Resume Section */}
-      <section
+      <motion.section
         id="resume"
         className="py-20 relative overflow-hidden"
         style={{
@@ -302,42 +494,74 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 to-amber-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">Resume</h2>
-            <p className="text-center text-orange-100/80 mb-8">
+            <motion.h2
+              className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Resume
+            </motion.h2>
+            <motion.p
+              className="text-center text-orange-100/80 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               View or download my resume to learn more about my experience and qualifications
-            </p>
+            </motion.p>
 
-            <div className="flex justify-center mb-8">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 shadow-glow"
-                asChild
-              >
-                <a href="/shubhams_resume.pdf" download="Shubham_Singh_Resume.pdf">
-                  <FileDown className="mr-2 h-5 w-5" />
-                  Download Resume
-                </a>
-              </Button>
-            </div>
+            <motion.div
+              className="flex justify-center mb-8"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 shadow-glow"
+                  asChild
+                >
+                  <a href="/shubhams_resume.pdf" download="Shubham_Singh_Resume.pdf">
+                    <FileDown className="mr-2 h-5 w-5" />
+                    Download Resume
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
 
             {/* PDF Viewer */}
-            <div className="bg-card border border-border rounded-lg overflow-hidden shadow-2xl">
+            <motion.div
+              className="bg-card border border-border rounded-lg overflow-hidden shadow-2xl"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <iframe
                 src="/shubhams_resume.pdf"
                 className="w-full h-[800px]"
                 title="Shubham Singh Resume"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section
+      <motion.section
         id="contact"
         className="py-20 relative overflow-hidden"
         style={{
@@ -346,53 +570,89 @@ const Index = () => {
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-pink-500/5 to-purple-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Let's Connect</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <motion.h2
+              className="text-4xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Let's Connect
+            </motion.h2>
+            <motion.p
+              className="text-lg text-muted-foreground mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               I'm always open to discussing new opportunities, collaborations, or just chatting about tech.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 shadow-glow"
-                asChild
-              >
-                <a href="mailto:shub.ss@outlook.com">
-                  <Mail className="mr-2 h-5 w-5" />
-                  Email Me
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary/50 hover:bg-primary/10"
-                asChild
-              >
-                <a href="https://linkedin.com/in/shubhamanilsingh" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="mr-2 h-5 w-5" />
-                  LinkedIn
-                </a>
-              </Button>
-            </div>
+            </motion.p>
 
-            <p className="text-muted-foreground">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 shadow-glow"
+                  asChild
+                >
+                  <a href="mailto:shub.ss@outlook.com">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Email Me
+                  </a>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-primary/50 hover:bg-primary/10"
+                  asChild
+                >
+                  <a href="https://linkedin.com/in/shubhamanilsingh" target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="mr-2 h-5 w-5" />
+                    LinkedIn
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            <motion.p
+              className="text-muted-foreground"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
               Or find me on{" "}
-              <a
+              <motion.a
                 href="https://github.com/code-sharingan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
+                whileHover={{ scale: 1.05 }}
+                style={{ display: 'inline-block' }}
               >
                 GitHub
-              </a>
-            </p>
+              </motion.a>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <footer
