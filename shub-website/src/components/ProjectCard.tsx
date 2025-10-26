@@ -45,7 +45,7 @@ const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, ima
         transition: "transform 0.3s ease-out",
       }}
     >
-      <Card className="group overflow-hidden bg-card border-border hover:shadow-glow transition-all duration-300">
+      <Card className="group overflow-hidden bg-card border-border hover:shadow-glow transition-all duration-300 h-full flex flex-col">
         {image && (
           <div className="h-48 overflow-hidden bg-secondary">
             <motion.img
@@ -57,7 +57,7 @@ const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, ima
             />
           </div>
         )}
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-grow">
           <motion.h3
             className="text-xl font-bold mb-2 text-foreground"
             whileHover={{ color: "hsl(var(--primary))" }}
@@ -65,9 +65,9 @@ const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, ima
           >
             {title}
           </motion.h3>
-          <p className="text-muted-foreground mb-4 line-clamp-3">{description}</p>
+          <p className="text-muted-foreground mb-4 line-clamp-4 flex-grow">{description}</p>
 
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-4 mt-auto">
             {technologies.map((tech, index) => (
               <motion.div
                 key={tech}

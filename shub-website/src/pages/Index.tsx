@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import Navbar from "@/components/Navbar";
-import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown, Sparkles, Zap, Rocket } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
 import coderImage from "@/assets/coder.png";
+import vibeImage from "@/assets/vibe.png";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -274,6 +275,167 @@ const Index = () => {
                 <SkillBadge name={skill} />
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Vibe Coding Section */}
+      <motion.section
+        id="vibe-coding"
+        className="py-20 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(10, 5, 25, 0.95), rgba(10, 5, 25, 0.95)), url(${cyberBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-violet-500/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-8 h-8 text-indigo-400" />
+              </motion.div>
+              <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
+                Vibe Coding with AI
+              </h2>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Zap className="w-8 h-8 text-violet-400" />
+              </motion.div>
+            </div>
+
+            <motion.p
+              className="text-center text-indigo-100/90 text-lg mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              The software development landscape is undergoing a revolutionary transformation.
+              AI isn't just changing how we code—it's redefining what's possible.
+            </motion.p>
+
+            <motion.div
+              className="grid md:grid-cols-2 gap-6 mb-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.2,
+                  },
+                },
+              }}
+            >
+              <motion.div
+                className="bg-gradient-to-br from-indigo-900/40 to-violet-900/40 border border-indigo-500/30 rounded-lg p-6 backdrop-blur-sm"
+                variants={{
+                  hidden: { opacity: 0, x: -30 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 0 40px rgba(99, 102, 241, 0.4)",
+                  borderColor: "rgba(99, 102, 241, 0.6)"
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-indigo-500/20 p-2 rounded-lg">
+                    <Rocket className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-indigo-300">AI-Powered Development</h3>
+                </div>
+                <p className="text-indigo-100/80 leading-relaxed">
+                  Artificial intelligence is reshaping the development industry at an unprecedented pace.
+                  From intelligent code completion to automated testing and bug detection, AI tools are
+                  becoming essential co-pilots in every developer's workflow.
+                </p>
+              </motion.div>
+
+              <motion.div
+                className="bg-gradient-to-br from-violet-900/40 to-purple-900/40 border border-violet-500/30 rounded-lg p-6 backdrop-blur-sm"
+                variants={{
+                  hidden: { opacity: 0, x: 30 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 0 40px rgba(139, 92, 246, 0.4)",
+                  borderColor: "rgba(139, 92, 246, 0.6)"
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-violet-500/20 p-2 rounded-lg">
+                    <Zap className="w-6 h-6 text-violet-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-violet-300">15x Faster Delivery</h3>
+                </div>
+                <p className="text-violet-100/80 leading-relaxed">
+                  By leveraging AI agents and advanced automation tools, I can deliver projects at 15 times
+                  the traditional speed—without compromising on quality. This means rapid prototyping, faster
+                  iterations, and getting products to market in record time.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-r from-indigo-900/30 via-violet-900/30 to-purple-900/30 border border-violet-500/20 rounded-lg p-8 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{
+                boxShadow: "0 0 50px rgba(124, 58, 237, 0.3)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="w-6 h-6 text-purple-400" />
+                <h3 className="text-2xl font-bold text-transparent bg-gradient-to-r from-indigo-300 via-violet-300 to-purple-300 bg-clip-text">
+                  My AI-Enhanced Workflow
+                </h3>
+              </div>
+              <p className="text-purple-100/80 leading-relaxed mb-4">
+                I harness the power of AI agents to streamline every aspect of development—from architecture
+                design and code generation to testing and deployment. This synergy between human creativity
+                and machine efficiency allows me to tackle complex problems faster and deliver robust solutions
+                that scale.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <span className="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-semibold border border-indigo-500/30">
+                  AI Code Assistants
+                </span>
+                <span className="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-full text-sm font-semibold border border-violet-500/30">
+                  Automated Testing
+                </span>
+                <span className="px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm font-semibold border border-purple-500/30">
+                  Smart Debugging
+                </span>
+                <span className="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-semibold border border-indigo-500/30">
+                  Rapid Prototyping
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
