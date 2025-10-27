@@ -46,7 +46,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {['Home', 'Skills', 'Projects', 'Education', 'Experience', 'Resume', 'Contact'].map((item, index) => (
+            {['Home', 'Skills', 'Expertise', 'Projects', 'Education', 'Experience', 'Resume', 'Contact'].map((item, index) => (
               <motion.button
                 key={item}
                 onClick={() => item === 'Home' ? window.scrollTo({ top: 0, behavior: 'smooth' }) : scrollToSection(item.toLowerCase())}
@@ -134,6 +134,12 @@ const Navbar = () => {
                 className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
               >
                 Skills
+              </button>
+              <button
+                onClick={() => scrollToSection('expertise')}
+                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
+              >
+                Expertise
               </button>
               <button
                 onClick={() => scrollToSection('projects')}

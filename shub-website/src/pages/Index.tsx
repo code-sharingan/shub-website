@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import Navbar from "@/components/Navbar";
+import ExpertiseSection from "@/components/ExpertiseSection";
 import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown, Sparkles, Zap, Rocket } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
 import coderImage from "@/assets/coder.png";
@@ -279,6 +280,9 @@ const Index = () => {
         </div>
       </motion.section>
 
+      {/* Expertise Section */}
+      <ExpertiseSection />
+
       {/* Vibe Coding Section */}
       <motion.section
         id="vibe-coding"
@@ -304,21 +308,9 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center justify-center gap-3 mb-4">
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              >
-                <Sparkles className="w-8 h-8 text-indigo-400" />
-              </motion.div>
               <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
                 Vibe Coding with AI
               </h2>
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Zap className="w-8 h-8 text-violet-400" />
-              </motion.div>
             </div>
 
             <motion.p
