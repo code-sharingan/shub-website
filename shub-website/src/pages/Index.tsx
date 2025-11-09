@@ -3,6 +3,7 @@ import ProjectCard from "@/components/ProjectCard";
 import SkillBadge from "@/components/SkillBadge";
 import Navbar from "@/components/Navbar";
 import ExpertiseSection from "@/components/ExpertiseSection";
+import CertificationsSection from "@/components/CertificationsSection";
 import { Mail, Github, Linkedin, ArrowDown, Code2, FileDown, Sparkles, Zap, Rocket } from "lucide-react";
 import cyberBg from "@/assets/cyber-bg.png";
 import coderImage from "@/assets/coder.png";
@@ -111,7 +112,7 @@ const Index = () => {
               <motion.img
                 src={coderImage}
                 alt="Shubham coding in a coffee shop"
-                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-background"
+                className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-background"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               />
@@ -120,7 +121,7 @@ const Index = () => {
             {/* Text Section */}
             <div className="text-center md:text-left max-w-2xl">
               <motion.h1
-                className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-primary bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -128,7 +129,7 @@ const Index = () => {
                 Shubham Singh
               </motion.h1>
               <motion.p
-                className="text-xl md:text-2xl text-muted-foreground mb-8"
+                className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 sm:mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -136,7 +137,7 @@ const Index = () => {
                 Computer Science Graduate | Full-Stack Developer
               </motion.p>
               <motion.p
-                className="text-lg text-muted-foreground/80 mb-12"
+                className="text-sm sm:text-base md:text-lg text-muted-foreground/80 mb-8 sm:mb-12 px-4 sm:px-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -232,7 +233,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
-            className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent px-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -241,7 +242,7 @@ const Index = () => {
             Skills & Technologies
           </motion.h2>
           <motion.p
-            className="text-center text-cyan-100/80 mb-12 max-w-2xl mx-auto"
+            className="text-center text-cyan-100/80 text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -251,7 +252,7 @@ const Index = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto"
+            className="flex flex-wrap gap-2 sm:gap-3 justify-center max-w-4xl mx-auto px-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -283,6 +284,9 @@ const Index = () => {
       {/* Expertise Section */}
       <ExpertiseSection />
 
+      {/* Certifications Section */}
+      <CertificationsSection />
+
       {/* Vibe Coding Section */}
       <motion.section
         id="vibe-coding"
@@ -307,14 +311,14 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
+            <div className="flex items-center justify-center gap-3 mb-4 px-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-center bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
                 Vibe Coding with AI
               </h2>
             </div>
 
             <motion.p
-              className="text-center text-indigo-100/90 text-lg mb-8 leading-relaxed"
+              className="text-center text-indigo-100/90 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed px-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -325,7 +329,7 @@ const Index = () => {
             </motion.p>
 
             <motion.div
-              className="grid md:grid-cols-2 gap-6 mb-8"
+              className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 px-4"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -339,7 +343,7 @@ const Index = () => {
               }}
             >
               <motion.div
-                className="bg-gradient-to-br from-indigo-900/40 to-violet-900/40 border border-indigo-500/30 rounded-lg p-6 backdrop-blur-sm"
+                className="bg-gradient-to-br from-indigo-900/40 to-violet-900/40 border border-indigo-500/30 rounded-lg p-4 sm:p-6 backdrop-blur-sm"
                 variants={{
                   hidden: { opacity: 0, x: -30 },
                   visible: { opacity: 1, x: 0 },
@@ -351,13 +355,13 @@ const Index = () => {
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3">
                   <div className="bg-indigo-500/20 p-2 rounded-lg">
-                    <Rocket className="w-6 h-6 text-indigo-400" />
+                    <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-300">AI-Powered Development</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-indigo-300">AI-Powered Development</h3>
                 </div>
-                <p className="text-indigo-100/80 leading-relaxed">
+                <p className="text-indigo-100/80 text-sm sm:text-base leading-relaxed">
                   Artificial intelligence is reshaping the development industry at an unprecedented pace.
                   From intelligent code completion to automated testing and bug detection, AI tools are
                   becoming essential co-pilots in every developer's workflow.
@@ -365,7 +369,7 @@ const Index = () => {
               </motion.div>
 
               <motion.div
-                className="bg-gradient-to-br from-violet-900/40 to-purple-900/40 border border-violet-500/30 rounded-lg p-6 backdrop-blur-sm"
+                className="bg-gradient-to-br from-violet-900/40 to-purple-900/40 border border-violet-500/30 rounded-lg p-4 sm:p-6 backdrop-blur-sm"
                 variants={{
                   hidden: { opacity: 0, x: 30 },
                   visible: { opacity: 1, x: 0 },
@@ -377,13 +381,13 @@ const Index = () => {
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3">
                   <div className="bg-violet-500/20 p-2 rounded-lg">
-                    <Zap className="w-6 h-6 text-violet-400" />
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-violet-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-violet-300">15x Faster Delivery</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-violet-300">15x Faster Delivery</h3>
                 </div>
-                <p className="text-violet-100/80 leading-relaxed">
+                <p className="text-violet-100/80 text-sm sm:text-base leading-relaxed">
                   By leveraging AI agents and advanced automation tools, I can deliver projects at 15 times
                   the traditional speed—without compromising on quality. This means rapid prototyping, faster
                   iterations, and getting products to market in record time.
@@ -392,7 +396,7 @@ const Index = () => {
             </motion.div>
 
             <motion.div
-              className="bg-gradient-to-r from-indigo-900/30 via-violet-900/30 to-purple-900/30 border border-violet-500/20 rounded-lg p-8 backdrop-blur-sm"
+              className="bg-gradient-to-r from-indigo-900/30 via-violet-900/30 to-purple-900/30 border border-violet-500/20 rounded-lg p-4 sm:p-6 md:p-8 backdrop-blur-sm mx-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -401,19 +405,19 @@ const Index = () => {
                 boxShadow: "0 0 50px rgba(124, 58, 237, 0.3)",
               }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="w-6 h-6 text-purple-400" />
-                <h3 className="text-2xl font-bold text-transparent bg-gradient-to-r from-indigo-300 via-violet-300 to-purple-300 bg-clip-text">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-transparent bg-gradient-to-r from-indigo-300 via-violet-300 to-purple-300 bg-clip-text">
                   My AI-Enhanced Workflow
                 </h3>
               </div>
-              <p className="text-purple-100/80 leading-relaxed mb-4">
+              <p className="text-purple-100/80 text-sm sm:text-base leading-relaxed mb-4">
                 I harness the power of AI agents to streamline every aspect of development—from architecture
                 design and code generation to testing and deployment. This synergy between human creativity
                 and machine efficiency allows me to tackle complex problems faster and deliver robust solutions
                 that scale.
               </p>
-              <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
                 <span className="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-semibold border border-indigo-500/30">
                   AI Code Assistants
                 </span>
@@ -450,7 +454,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-pink-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
-            className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent px-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -459,7 +463,7 @@ const Index = () => {
             Featured Projects
           </motion.h2>
           <motion.p
-            className="text-center text-purple-100/80 mb-12 max-w-2xl mx-auto"
+            className="text-center text-purple-100/80 text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -468,7 +472,7 @@ const Index = () => {
             A selection of my recent work and side projects
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto px-4">
             <ProjectCard
               title="FreedomLedger"
               description="Full-stack fintech application with Next.js 15/React 19 frontend and FastAPI backend, processing real-time financial data from Plaid API across 11,000+ institutions. Features advanced data visualization with D3.js, enterprise-grade security with Firebase Authentication, and comprehensive RESTful API architecture with 45+ endpoints."
@@ -510,7 +514,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <motion.h2
-              className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent px-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -519,7 +523,7 @@ const Index = () => {
               Education
             </motion.h2>
             <motion.div
-              className="bg-card border border-border rounded-lg p-8 shadow-lg"
+              className="bg-card border border-border rounded-lg p-4 sm:p-6 md:p-8 shadow-lg"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -528,17 +532,17 @@ const Index = () => {
             >
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">University of Utah</h3>
-                  <p className="text-xl text-primary mb-2">Bachelor of Science in Computer Science</p>
-                  <p className="text-muted-foreground">Salt Lake City, Utah</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">University of Utah</h3>
+                  <p className="text-lg sm:text-xl text-primary mb-2">Bachelor of Science in Computer Science</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">Salt Lake City, Utah</p>
                 </div>
                 <div className="text-muted-foreground mt-2 md:mt-0">
-                  <p className="text-lg font-semibold">December 2025</p>
+                  <p className="text-base sm:text-lg font-semibold">December 2025</p>
                 </div>
               </div>
-              <div className="mt-6">
-                <p className="text-foreground font-semibold mb-2">Dean's List: Spring 2021 & Fall 2021</p>
-                <p className="text-muted-foreground mb-3">Relevant Coursework:</p>
+              <div className="mt-4 sm:mt-6">
+                <p className="text-sm sm:text-base text-foreground font-semibold mb-2">Dean's List: Spring 2021 & Fall 2021</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3">Relevant Coursework:</p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Algorithms</span>
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Software Practices</span>
@@ -575,7 +579,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <motion.h2
-              className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent px-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -583,9 +587,9 @@ const Index = () => {
             >
               Experience
             </motion.h2>
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <motion.div
-                className="bg-card border border-border rounded-lg p-8 shadow-lg"
+                className="bg-card border border-border rounded-lg p-4 sm:p-6 md:p-8 shadow-lg"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -594,15 +598,15 @@ const Index = () => {
               >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-1">Peer Mentor</h3>
-                    <p className="text-lg text-primary mb-2">Kahlert School of Computing</p>
-                    <p className="text-muted-foreground">Salt Lake City, UT</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Peer Mentor</h3>
+                    <p className="text-base sm:text-lg text-primary mb-2">Kahlert School of Computing</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">Salt Lake City, UT</p>
                   </div>
                   <div className="text-muted-foreground mt-2 md:mt-0">
-                    <p className="text-lg font-semibold">May 2023 - Present</p>
+                    <p className="text-base sm:text-lg font-semibold">May 2023 - Present</p>
                   </div>
                 </div>
-                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <ul className="list-disc list-inside space-y-2 text-sm sm:text-base text-muted-foreground">
                   <li>Assisted over 100 students with course selection, scheduling, and registration</li>
                   <li>Guided students on major selection and career paths within the computing field</li>
                   <li>Collaborated with the mentorship program coordinator to revamp the program structure, resulting in significant increase in mentee engagement</li>
@@ -610,7 +614,7 @@ const Index = () => {
               </motion.div>
 
               <motion.div
-                className="bg-card border border-border rounded-lg p-8 shadow-lg"
+                className="bg-card border border-border rounded-lg p-4 sm:p-6 md:p-8 shadow-lg"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -619,15 +623,15 @@ const Index = () => {
               >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-1">Teaching Assistant</h3>
-                    <p className="text-lg text-primary mb-2">Kahlert School of Computing</p>
-                    <p className="text-muted-foreground">Salt Lake City, UT</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Teaching Assistant</h3>
+                    <p className="text-base sm:text-lg text-primary mb-2">Kahlert School of Computing</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">Salt Lake City, UT</p>
                   </div>
                   <div className="text-muted-foreground mt-2 md:mt-0">
-                    <p className="text-lg font-semibold">January 2022 - May 2023</p>
+                    <p className="text-base sm:text-lg font-semibold">January 2022 - May 2023</p>
                   </div>
                 </div>
-                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <ul className="list-disc list-inside space-y-2 text-sm sm:text-base text-muted-foreground">
                   <li>Assisted professors with classroom management and document coordination to maintain a positive learning environment</li>
                   <li>Collaborated with teachers to plan and implement lessons following the school's curriculum and objectives that contributed to a 15% retention rate</li>
                   <li>Provided group tutoring to a group of 20 students to reinforce learning concepts like object-oriented programming and help them follow good software practices</li>
@@ -657,7 +661,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
             <motion.h2
-              className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent px-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -666,7 +670,7 @@ const Index = () => {
               Resume
             </motion.h2>
             <motion.p
-              className="text-center text-orange-100/80 mb-8"
+              className="text-center text-orange-100/80 text-sm sm:text-base mb-6 sm:mb-8 px-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -706,7 +710,7 @@ const Index = () => {
             >
               <iframe
                 src="/shubhams_resume.pdf"
-                className="w-full h-[800px]"
+                className="w-full h-[500px] sm:h-[600px] md:h-[800px]"
                 title="Shubham Singh Resume"
               />
             </motion.div>
@@ -733,7 +737,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
             <motion.h2
-              className="text-4xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent px-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -742,7 +746,7 @@ const Index = () => {
               Let's Connect
             </motion.h2>
             <motion.p
-              className="text-lg text-muted-foreground mb-8"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 px-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -786,7 +790,7 @@ const Index = () => {
             </motion.div>
 
             <motion.p
-              className="text-muted-foreground"
+              className="text-muted-foreground text-sm sm:text-base px-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

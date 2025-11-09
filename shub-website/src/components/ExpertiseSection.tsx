@@ -90,37 +90,39 @@ const ExpertiseSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5"></div>
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12 px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
               My Expertise
             </h2>
           </div>
-          <p className="text-cyan-100/80 text-lg">
+          <p className="text-cyan-100/80 text-base sm:text-lg px-4">
             Real-world experience across the full technology stack
           </p>
         </motion.div>
 
         {/* Infinite Scroll Carousel */}
         <div
-          className="relative w-full overflow-hidden py-8 isolate"
+          className="relative w-full overflow-hidden py-4 md:py-8 isolate"
           style={{
-            maskImage: 'linear-gradient(to right, transparent, black 8rem, black calc(100% - 8rem), transparent)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent, black 8rem, black calc(100% - 8rem), transparent)',
+            maskImage: 'linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent)',
           }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
         >
           {/* Optional static blur layer */}
           <div className="absolute inset-0 pointer-events-none" style={{ backdropFilter: 'blur(4px)' }} />
 
           <motion.div
-            className="flex gap-8 will-change-transform [transform:translateZ(0)]"
+            className="flex gap-4 md:gap-8 will-change-transform [transform:translateZ(0)]"
             animate={{
               x: isPaused ? undefined : [0, -100 * expertiseData.length + "%"],
             }}
@@ -142,14 +144,16 @@ const ExpertiseSection = () => {
 
         {/* Hint */}
         <motion.div
-          className="mt-8 text-center"
+          className="mt-6 md:mt-8 text-center px-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <p className="text-cyan-100/60 italic">
-            Hover to pause • Smoothly scrolling through all expertise areas
+          <p className="text-cyan-100/60 italic text-xs sm:text-sm">
+            <span className="hidden sm:inline">Hover to pause • </span>
+            <span className="sm:hidden">Tap to pause • </span>
+            Smoothly scrolling through all expertise areas
           </p>
         </motion.div>
       </div>
@@ -163,28 +167,28 @@ const ExpertiseCard = ({ data }: { data: typeof expertiseData[0] }) => {
 
   return (
     <motion.div
-      className={`bg-white/5 border ${data.borderColor} rounded-xl p-6 transition-all duration-300 w-[400px] h-[480px] flex flex-col flex-shrink-0 hover:shadow-lg`}
+      className={`bg-white/5 border ${data.borderColor} rounded-xl p-4 sm:p-6 transition-all duration-300 w-[280px] sm:w-[350px] md:w-[400px] h-[400px] sm:h-[450px] md:h-[480px] flex flex-col flex-shrink-0 hover:shadow-lg`}
       whileHover={{
         scale: 1.05,
       }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className={`rounded-xl bg-gradient-to-br ${data.bgGradient} h-full flex flex-col`}>
-        <div className="flex items-center gap-4 mb-6">
+      <div className={`rounded-xl bg-gradient-to-br ${data.bgGradient} h-full flex flex-col p-2 sm:p-0`}>
+        <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
           <motion.div
-            className={`bg-gradient-to-br ${data.bgGradient} p-4 rounded-lg border ${data.borderColor}`}
+            className={`bg-gradient-to-br ${data.bgGradient} p-3 sm:p-4 rounded-lg border ${data.borderColor}`}
             whileHover={{ rotate: [0, -10, 10, -10, 0] }}
             transition={{ duration: 0.5 }}
           >
-            <Icon className="w-8 h-8 text-white" />
+            <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
           </motion.div>
-          <h3 className={`text-xl font-bold bg-gradient-to-r ${data.color} bg-clip-text text-transparent`}>
+          <h3 className={`text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r ${data.color} bg-clip-text text-transparent`}>
             {data.title}
           </h3>
         </div>
 
-        <div className={`border-l-4 ${data.borderColor} pl-4 flex-1 overflow-y-auto scrollbar-hide`}>
-          <p className="text-foreground/90 leading-relaxed text-sm">
+        <div className={`border-l-4 ${data.borderColor} pl-3 sm:pl-4 flex-1 overflow-y-auto scrollbar-hide`}>
+          <p className="text-foreground/90 leading-relaxed text-xs sm:text-sm">
             {data.description}
           </p>
         </div>

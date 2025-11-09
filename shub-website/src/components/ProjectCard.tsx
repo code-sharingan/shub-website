@@ -57,15 +57,15 @@ const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, ima
             />
           </div>
         )}
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-4 sm:p-6 flex flex-col flex-grow">
           <motion.h3
-            className="text-xl font-bold mb-2 text-foreground"
+            className="text-lg sm:text-xl font-bold mb-2 text-foreground"
             whileHover={{ color: "hsl(var(--primary))" }}
             transition={{ duration: 0.2 }}
           >
             {title}
           </motion.h3>
-          <p className="text-muted-foreground mb-4 line-clamp-4 flex-grow">{description}</p>
+          <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-4 flex-grow">{description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4 mt-auto">
             {technologies.map((tech, index) => (
@@ -76,7 +76,7 @@ const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, ima
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, type: "spring", stiffness: 200 }}
               >
-                <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary transition-colors">
+                <Badge variant="secondary" className="bg-secondary/50 hover:bg-secondary transition-colors text-xs sm:text-sm">
                   {tech}
                 </Badge>
               </motion.div>

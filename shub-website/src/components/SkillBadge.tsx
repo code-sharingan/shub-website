@@ -18,9 +18,9 @@ const SkillBadge = ({ name, icon }: SkillBadgeProps) => {
     >
       <Badge
         variant="outline"
-        className="px-4 py-2 text-sm border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all cursor-default"
+        className="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all cursor-default"
       >
-        {icon && <span className="mr-2">{icon}</span>}
+        {icon && <span className="mr-1 sm:mr-2">{icon}</span>}
         {name}
       </Badge>
     </motion.div>
