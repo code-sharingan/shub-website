@@ -265,7 +265,7 @@ const Index = () => {
               },
             }}
           >
-            {["Java", "C#", "C++", "Python", "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Django", "Spring Boot", "FastAPI", "REST APIs", "PostgreSQL", "MySQL", "MongoDB", "AWS (EC2)", "Azure", "Firebase", "D3.js", "Tailwind CSS", "Git/GitHub", "Agile/Scrum", "TDD"].map((skill, index) => (
+            {["Java", "C#", "C++", "Python", "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Django", "Spring Boot", "FastAPI", "REST APIs", "PostgreSQL", "MySQL", "MongoDB", "AWS (EC2)", "Azure", "Firebase", "Google Cloud", "Machine Learning", "MLOps", "D3.js", "Tailwind CSS", "Git/GitHub", "Agile/Scrum", "TDD"].map((skill, index) => (
               <motion.div
                 key={skill}
                 variants={{
