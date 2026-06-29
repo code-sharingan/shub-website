@@ -1,199 +1,77 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Code2, Database, Cloud, Layout, Cpu, Zap } from "lucide-react";
-import cyberBg from "@/assets/cyber-bg.png";
+import { Workflow, Search, Activity, Server, Users, Layout } from "lucide-react";
 
-const expertiseData = [
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const CAPABILITIES = [
   {
-    id: "fullstack",
-    icon: Code2,
-    title: "Full-Stack Development",
-    color: "from-cyan-400 to-blue-400",
-    bgGradient: "from-cyan-500/10 to-blue-500/10",
-    borderColor: "border-cyan-500/30",
-    glowColor: "hover:shadow-cyan-500/50",
-    description: "Built production-ready applications using modern frameworks and best practices. I've developed FreedomLedger, a full-stack fintech application processing real-time financial data from 11,000+ institutions using Next.js 15/React 19 frontend and FastAPI backend. Implemented enterprise-grade security with Firebase Authentication and comprehensive RESTful API architecture with 45+ endpoints.",
+    icon: Workflow,
+    title: "LLM Agents & Agentic Workflows",
+    desc: "Multi-step agent systems with LangGraph and LangChain — routing, tool use, and retrieval — on the Anthropic and OpenAI APIs. The runtime behind client support workflows at DataPipers and the NeuralDesk platform.",
   },
   {
-    id: "backend",
-    icon: Database,
-    title: "Backend Architecture & APIs",
-    color: "from-purple-400 to-pink-400",
-    bgGradient: "from-purple-500/10 to-pink-500/10",
-    borderColor: "border-purple-500/30",
-    glowColor: "hover:shadow-purple-500/50",
-    description: "Designed and implemented scalable backend systems with RESTful APIs. Created a real-time chat application backend using FastAPI with WebSocket support, managed user authentication flows, and optimized database interactions. Developed 45+ API endpoints for FreedomLedger with proper error handling, validation, and documentation.",
+    icon: Search,
+    title: "Retrieval-Augmented Generation",
+    desc: "Production RAG over client knowledge bases: semantic chunking, hybrid keyword + vector search, embeddings, and vector stores (Chroma, Pinecone). Raised retrieval accuracy from 85% to 96%.",
   },
   {
-    id: "databases",
-    icon: Database,
-    title: "Database Design & Management",
-    color: "from-green-400 to-emerald-400",
-    bgGradient: "from-green-500/10 to-emerald-500/10",
-    borderColor: "border-green-500/30",
-    glowColor: "hover:shadow-green-500/50",
-    description: "Proficient in both SQL and NoSQL databases. Designed and optimized database schemas for FreedomLedger using PostgreSQL, handling complex financial transactions and user data. Implemented efficient queries, indexing strategies, and data relationships. Also experienced with MongoDB for flexible document-based storage and Firebase for real-time applications.",
+    icon: Activity,
+    title: "Production & MLOps",
+    desc: "Ship and operate: Docker, CI/CD with GitHub Actions, monitoring and observability, and model evaluation. Cut LLM inference latency 12s → 8s via caching, query optimization, and an OLAP → OLTP serving migration.",
   },
   {
-    id: "frontend",
+    icon: Server,
+    title: "Backend & APIs",
+    desc: "Python (FastAPI), Go, and TypeScript / Node.js services — async (asyncio), REST, and WebSockets. Architected a 15+ table PostgreSQL schema with sub-100ms queries.",
+  },
+  {
+    icon: Users,
+    title: "Forward-Deployed Delivery",
+    desc: "Own the client relationship end-to-end — discovery calls, requirement gathering, and live debugging in production — leading weekly syncs as the primary technical point of contact.",
+  },
+  {
     icon: Layout,
-    title: "Modern Frontend Development",
-    color: "from-orange-400 to-red-400",
-    bgGradient: "from-orange-500/10 to-red-500/10",
-    borderColor: "border-orange-500/30",
-    glowColor: "hover:shadow-orange-500/50",
-    description: "Created responsive, accessible user interfaces with React, Next.js, and Vue.js. Built advanced data visualizations using D3.js for FreedomLedger's financial dashboards. Implemented real-time UI updates in chat applications with WebSocket integration. Mastered modern CSS frameworks like Tailwind CSS and created smooth animations with Framer Motion.",
-  },
-  {
-    id: "cloud",
-    icon: Cloud,
-    title: "Cloud & DevOps",
-    color: "from-indigo-400 to-violet-400",
-    bgGradient: "from-indigo-500/10 to-violet-500/10",
-    borderColor: "border-indigo-500/30",
-    glowColor: "hover:shadow-indigo-500/50",
-    description: "Deployed and managed applications on AWS (EC2), Azure, and Firebase. Configured cloud infrastructure, implemented CI/CD pipelines, and managed environment variables for secure deployments. Integrated third-party services like Plaid API for real-time financial data processing across multiple cloud platforms.",
-  },
-  {
-    id: "networking",
-    icon: Cpu,
-    title: "Real-Time Systems & Networking",
-    color: "from-yellow-400 to-amber-400",
-    bgGradient: "from-yellow-500/10 to-amber-500/10",
-    borderColor: "border-yellow-500/30",
-    glowColor: "hover:shadow-yellow-500/50",
-    description: "Implemented real-time communication systems using WebSockets and TCP sockets. Developed a multiplayer Agario game client with consistent game state synchronization across clients using C# and TCP networking. Built real-time chat applications with instant message delivery and presence detection using FastAPI and WebSocket protocols.",
+    title: "Frontend for AI",
+    desc: "React interfaces for agent interactions, delivering real-time streaming responses and a clean user experience across client deployments.",
   },
 ];
 
 const ExpertiseSection = () => {
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Duplicate the array for seamless infinite loop
-  const duplicatedData = [...expertiseData, ...expertiseData];
-
   return (
-    <motion.section
-      id="expertise"
-      className="py-20 relative overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(5, 5, 20, 0.95), rgba(5, 5, 20, 0.95)), url(${cyberBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          className="text-center mb-8 md:mb-12 px-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              My Expertise
+    <section id="expertise" className="border-t border-foreground/10 bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-6">
+          <div>
+            <p className="section-label mb-3">02 — Capabilities</p>
+            <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.02em] text-foreground">
+              What I do
             </h2>
           </div>
-          <p className="text-cyan-100/80 text-base sm:text-lg px-4">
-            Real-world experience across the full technology stack
-          </p>
-        </motion.div>
-
-        {/* Infinite Scroll Carousel */}
-        <div
-          className="relative w-full overflow-hidden py-4 md:py-8 isolate"
-          style={{
-            maskImage: 'linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent)',
-          }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => setIsPaused(false)}
-        >
-          {/* Optional static blur layer */}
-          <div className="absolute inset-0 pointer-events-none" style={{ backdropFilter: 'blur(4px)' }} />
-
-          <motion.div
-            className="flex gap-4 md:gap-8 will-change-transform [transform:translateZ(0)]"
-            animate={{
-              x: isPaused ? undefined : [0, -100 * expertiseData.length + "%"],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 403,
-                ease: "linear",
-              },
-            }}
-            style={{ width: "max-content" }}
-          >
-            {duplicatedData.map((expertise, index) => (
-              <ExpertiseCard key={`${expertise.id}-${index}`} data={expertise} />
-            ))}
-          </motion.div>
         </div>
 
-        {/* Hint */}
-        <motion.div
-          className="mt-6 md:mt-8 text-center px-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <p className="text-cyan-100/60 italic text-xs sm:text-sm">
-            <span className="hidden sm:inline">Hover to pause • </span>
-            <span className="sm:hidden">Tap to pause • </span>
-            Smoothly scrolling through all expertise areas
-          </p>
-        </motion.div>
-      </div>
-    </motion.section>
-  );
-};
-
-// Expertise Card Component
-const ExpertiseCard = ({ data }: { data: typeof expertiseData[0] }) => {
-  const Icon = data.icon;
-
-  return (
-    <motion.div
-      className={`bg-white/5 border ${data.borderColor} rounded-xl p-4 sm:p-6 transition-all duration-300 w-[280px] sm:w-[350px] md:w-[400px] h-[400px] sm:h-[450px] md:h-[480px] flex flex-col flex-shrink-0 hover:shadow-lg`}
-      whileHover={{
-        scale: 1.05,
-      }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      <div className={`rounded-xl bg-gradient-to-br ${data.bgGradient} h-full flex flex-col p-2 sm:p-0`}>
-        <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-          <motion.div
-            className={`bg-gradient-to-br ${data.bgGradient} p-3 sm:p-4 rounded-lg border ${data.borderColor}`}
-            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-            transition={{ duration: 0.5 }}
-          >
-            <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-          </motion.div>
-          <h3 className={`text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r ${data.color} bg-clip-text text-transparent`}>
-            {data.title}
-          </h3>
-        </div>
-
-        <div className={`border-l-4 ${data.borderColor} pl-3 sm:pl-4 flex-1 overflow-y-auto scrollbar-hide`}>
-          <p className="text-foreground/90 leading-relaxed text-xs sm:text-sm">
-            {data.description}
-          </p>
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-foreground/10 bg-foreground/10 sm:grid-cols-2 lg:grid-cols-3">
+          {CAPABILITIES.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <motion.div
+                key={c.title}
+                className="group bg-background p-7 transition-colors duration-300 hover:bg-card/60"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, ease: EASE, delay: (i % 3) * 0.08 }}
+              >
+                <Icon className="h-5 w-5 text-accent transition-transform duration-300 group-hover:-translate-y-0.5" />
+                <h3 className="mt-5 font-display text-xl font-normal tracking-tight text-foreground">
+                  {c.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 

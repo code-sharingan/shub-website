@@ -1,183 +1,148 @@
-"use client";
+import { motion } from "framer-motion";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
+import NodeField from "./NodeField";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-/**
- * Hero Component - Apple-inspired glassmorphism design
- * Features: floating gradient blobs, film grain, glass cards, animated sheen effect
- */
-export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, delay, ease: EASE },
+});
 
-  // Parallax scroll effect for gradient blobs
-  const { scrollY } = useScroll();
-  const blob1Y = useTransform(scrollY, [0, 500], [0, 150]);
-  const blob2Y = useTransform(scrollY, [0, 500], [0, -100]);
-  const blob3Y = useTransform(scrollY, [0, 500], [0, 80]);
+const SYSTEMS: [string, string][] = [
+  ["agent-runtime", "live"],
+  ["rag-retrieval", "live"],
+  ["streaming-api", "live"],
+];
 
-  // Track mouse for subtle interactive effects
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
+const Hero = () => {
   return (
     <section
-      ref={heroRef}
-      className="relative min-h-screen w-full overflow-hidden bg-black flex items-center justify-center"
+      id="home"
+      className="relative flex min-h-screen w-full items-center overflow-hidden bg-background"
     >
-      {/* Radial vignette effect */}
-      <div className="vignette" />
+      <div className="hero-mesh" aria-hidden="true" />
+      <NodeField className="absolute inset-0 h-full w-full opacity-70" />
+      <div className="grain-overlay" aria-hidden="true" />
 
-      {/* Film grain overlay */}
-      <div className="grain" />
-
-      {/* Floating gradient blobs - GPU accelerated with will-change */}
-      <motion.div
-        className="blob blob-purple"
-        style={{
-          y: blob1Y,
-          willChange: "transform",
-        }}
-      />
-      <motion.div
-        className="blob blob-blue"
-        style={{
-          y: blob2Y,
-          willChange: "transform",
-        }}
-      />
-      <motion.div
-        className="blob blob-pink"
-        style={{
-          y: blob3Y,
-          willChange: "transform",
-        }}
-      />
-
-      {/* Main content container */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center">
-        {/* Pill CTA */}
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-20 pt-32 md:px-10">
+        {/* top hairline label row — editorial / printed-contents motif */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-block mb-8"
+          {...rise(0)}
+          className="mb-12 flex items-center justify-between border-b border-foreground/10 pb-4 section-label"
         >
-          <span className="pill-cta group">
-            <span className="relative z-10">New Feature Available</span>
-            <svg
-              className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <span>Shubham Anil Singh</span>
+          <span className="hidden sm:inline">00 — Index</span>
+          <span className="flex items-center gap-2">
+            <span className="status-dot" /> Available 2026
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* headline column */}
+          <div className="lg:col-span-8">
+            <motion.p
+              {...rise(0.05)}
+              className="mb-6 font-mono text-xs uppercase tracking-[0.28em] text-accent"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </span>
-        </motion.div>
+              Forward Deployed AI Engineer
+            </motion.p>
 
-        {/* Headline with gloss sheen effect */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="headline-wrapper mb-8"
-        >
-          <span className="headline">
-            Build Something{" "}
-            <span className="gloss-text group relative inline-block">
-              Extraordinary
-              {/* Animated sheen effect on hover */}
-              <span className="sheen" />
-            </span>
-            <br />
-            With Modern{" "}
-            <span className="gloss-text group relative inline-block">
-              Technology
-              <span className="sheen" />
-            </span>
-          </span>
-        </motion.h1>
+            <motion.h1
+              {...rise(0.12)}
+              className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-light leading-[0.98] tracking-[-0.02em] text-foreground"
+            >
+              I build AI systems
+              <br />
+              that make it to{" "}
+              <em className="font-normal italic text-accent">production.</em>
+            </motion.h1>
 
-        {/* Body text */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="body-text max-w-2xl mx-auto mb-12"
-        >
-          Experience the next generation of web development with cutting-edge
-          design, seamless performance, and unparalleled user experience.
-        </motion.p>
+            <motion.p
+              {...rise(0.2)}
+              className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            >
+              I own the full lifecycle of client-facing LLM agents — from discovery
+              and prototyping through deployment and live debugging in production.
+            </motion.p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <button className="btn-primary group">
-            <span className="relative z-10">Get Started</span>
-            <div className="btn-gradient" />
-          </button>
-          <button className="btn-secondary">Learn More</button>
-        </motion.div>
-
-        {/* Glass cards grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20"
-        >
-          {[
-            {
-              title: "Lightning Fast",
-              desc: "Optimized for peak performance",
-              icon: "⚡",
-            },
-            {
-              title: "Secure by Default",
-              desc: "Enterprise-grade security built-in",
-              icon: "🔒",
-            },
-            {
-              title: "Fully Responsive",
-              desc: "Beautiful on every device",
-              icon: "📱",
-            },
-          ].map((card, idx) => (
-            <div key={idx} className="glass-card group">
-              {/* Inner highlight */}
-              <div className="glass-highlight" />
-
-              <div className="relative z-10">
-                <div className="text-4xl mb-4 transition-transform group-hover:scale-110 duration-300">
-                  {card.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2 tracking-wide">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {card.desc}
-                </p>
+            <motion.div
+              {...rise(0.28)}
+              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4"
+            >
+              <a href="#projects" className="btn-solid">
+                View work <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <a
+                href="/shubhams_resume.pdf"
+                download="Shubham_Singh_Resume.pdf"
+                className="btn-glass"
+              >
+                Résumé
+              </a>
+              <div className="ml-1 flex items-center gap-5 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <a
+                  className="transition-colors hover:text-foreground"
+                  href="https://github.com/code-sharingan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+                <a
+                  className="transition-colors hover:text-foreground"
+                  href="https://linkedin.com/in/shubhamanilsingh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
               </div>
+            </motion.div>
+          </div>
+
+          {/* glass "system status" card — the one glass moment, breaking the grid */}
+          <motion.aside {...rise(0.42)} className="lg:col-span-4 lg:mt-24">
+            <div className="glass rounded-xl p-5 font-mono text-xs">
+              <div className="mb-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                <span>System · Status</span>
+                <span className="status-dot" />
+              </div>
+              <ul className="space-y-2.5 text-muted-foreground">
+                {SYSTEMS.map(([name, state]) => (
+                  <li key={name} className="flex items-center justify-between">
+                    <span className="text-foreground/80">{name}</span>
+                    <span className="flex items-center gap-1.5 text-accent">
+                      <span className="status-dot" />
+                      {state}
+                    </span>
+                  </li>
+                ))}
+                <li className="flex items-center justify-between border-t border-foreground/10 pt-2.5">
+                  <span>retrieval acc.</span>
+                  <span className="text-foreground/80">96%</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>inference p95</span>
+                  <span className="text-foreground/80">8.0&nbsp;s</span>
+                </li>
+              </ul>
             </div>
-          ))}
-        </motion.div>
+          </motion.aside>
+        </div>
       </div>
+
+      <motion.a
+        href="#projects"
+        {...rise(0.6)}
+        aria-label="Scroll to work"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ArrowDown className="h-5 w-5 animate-bounce-slow" />
+      </motion.a>
     </section>
   );
-}
+};
+
+export default Hero;

@@ -1,151 +1,118 @@
 import { motion } from "framer-motion";
-import { Award } from "lucide-react";
-import cyberBg from "@/assets/cyber-bg.png";
 import ociBadge from "@/assets/OCI25DOPOCP.jpg";
 import googleMlBadge from "@/assets/Badge.png";
 
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+type Cert = {
+  badge: string;
+  issuer: string;
+  title: string;
+  meta: string;
+  desc: string;
+  tags: string[];
+  href?: string;
+};
+
+const CERTS: Cert[] = [
+  {
+    badge: googleMlBadge,
+    issuer: "Google Cloud",
+    title: "Professional Machine Learning Engineer",
+    meta: "2025 · Credly verified",
+    desc: "Designing, building, and productionizing ML models on Google Cloud — data prep with BigQuery, training with Vertex AI, end-to-end ML pipelines, and MLOps for monitoring, versioning, and automated retraining.",
+    tags: ["Vertex AI", "BigQuery", "MLOps", "ML Pipelines"],
+    href: "https://www.credly.com/badges/5f47a9a8-6c7b-4fd3-a988-4a88084030a3",
+  },
+  {
+    badge: ociBadge,
+    issuer: "Oracle Cloud Infrastructure",
+    title: "DevOps Professional",
+    meta: "ID · OCI25DOPOCP",
+    desc: "DevOps workflows on Oracle Cloud Infrastructure — CI/CD with OCI DevOps, infrastructure as code with Terraform, containerization with OKE, and automated deployments across cloud environments.",
+    tags: ["CI/CD", "Terraform", "Kubernetes", "Cloud Automation"],
+  },
+];
+
 const CertificationsSection = () => {
   return (
-    <motion.section
+    <section
       id="certifications"
-      className="py-20 relative overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(5, 5, 20, 0.95), rgba(5, 5, 20, 0.95)), url(${cyberBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6 }}
+      className="border-t border-foreground/10 bg-background py-24 md:py-32"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-red-500/5 to-orange-500/5"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent px-4"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Professional Certifications
-          </motion.h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* OCI Certification */}
-            <motion.div
-              className="bg-card border border-border rounded-lg p-8 md:p-10 shadow-lg flex flex-col items-center text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(248, 113, 113, 0.3)" }}
-            >
-              <motion.div
-                className="flex-shrink-0 mb-5"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <div className="relative">
-                  <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 rounded-lg opacity-30 blur-lg"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  />
-                  <img
-                    src={ociBadge}
-                    alt="Oracle Cloud Infrastructure Professional DevOps Certification Badge"
-                    className="relative w-36 h-36 sm:w-48 sm:h-48 rounded-lg object-contain shadow-2xl"
-                    style={{ mixBlendMode: 'lighten', filter: 'brightness(1.1) contrast(1.1)' }}
-                  />
-                </div>
-              </motion.div>
-              <div className="flex items-center gap-2 mb-1">
-                <Award className="w-5 h-5 text-orange-400" />
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Oracle Cloud Infrastructure</h3>
-              </div>
-              <p className="text-lg text-primary mb-1">DevOps Professional</p>
-              <p className="text-sm text-muted-foreground mb-3">
-                ID: <span className="font-mono text-orange-400">OCI25DOPOCP</span>
-              </p>
-              <p className="text-base text-foreground/80 leading-relaxed mb-5">
-                Demonstrated expertise in designing and managing DevOps workflows on Oracle Cloud Infrastructure,
-                including building CI/CD pipelines with OCI DevOps, provisioning infrastructure as code with
-                Terraform, containerizing applications with OKE, and automating deployments across cloud environments.
-              </p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="px-3 py-1.5 bg-red-500/10 text-red-300 rounded-full text-sm font-semibold border border-red-500/30">OCI DevOps</span>
-                <span className="px-3 py-1.5 bg-orange-500/10 text-orange-300 rounded-full text-sm font-semibold border border-orange-500/30">CI/CD</span>
-                <span className="px-3 py-1.5 bg-red-500/10 text-red-300 rounded-full text-sm font-semibold border border-red-500/30">Terraform</span>
-                <span className="px-3 py-1.5 bg-orange-500/10 text-orange-300 rounded-full text-sm font-semibold border border-orange-500/30">Kubernetes</span>
-                <span className="px-3 py-1.5 bg-red-500/10 text-red-300 rounded-full text-sm font-semibold border border-red-500/30">Cloud Automation</span>
-              </div>
-            </motion.div>
-
-            {/* Google ML Certification */}
-            <motion.div
-              className="bg-card border border-border rounded-lg p-8 md:p-10 shadow-lg flex flex-col items-center text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(59, 130, 246, 0.3)" }}
-            >
-              <motion.div
-                className="flex-shrink-0 mb-5"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <a
-                  href="https://www.credly.com/badges/5f47a9a8-6c7b-4fd3-a988-4a88084030a3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="relative">
-                    <motion.div
-                      className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 rounded-lg opacity-30 blur-lg"
-                      animate={{ rotate: -360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.img
-                      src={googleMlBadge}
-                      alt="Google Professional Machine Learning Engineer Certification Badge"
-                      className="relative w-36 h-36 sm:w-48 sm:h-48 rounded-lg object-contain shadow-2xl cursor-pointer"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    />
-                  </div>
-                </a>
-              </motion.div>
-              <div className="flex items-center gap-2 mb-1">
-                <Award className="w-5 h-5 text-blue-400" />
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Google Cloud</h3>
-              </div>
-              <p className="text-lg text-primary mb-1">Professional Machine Learning Engineer</p>
-              <p className="text-sm text-muted-foreground mb-3">Issued via Credly</p>
-              <p className="text-base text-foreground/80 leading-relaxed mb-5">
-                Proven proficiency in designing, building, and productionizing ML models on Google Cloud,
-                including data preparation with BigQuery, model training with Vertex AI, building end-to-end
-                ML pipelines, and implementing MLOps practices for model monitoring, versioning, and automated retraining.
-              </p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="px-3 py-1.5 bg-blue-500/10 text-blue-300 rounded-full text-sm font-semibold border border-blue-500/30">Vertex AI</span>
-                <span className="px-3 py-1.5 bg-green-500/10 text-green-300 rounded-full text-sm font-semibold border border-green-500/30">BigQuery</span>
-                <span className="px-3 py-1.5 bg-blue-500/10 text-blue-300 rounded-full text-sm font-semibold border border-blue-500/30">MLOps</span>
-                <span className="px-3 py-1.5 bg-green-500/10 text-green-300 rounded-full text-sm font-semibold border border-green-500/30">TensorFlow</span>
-                <span className="px-3 py-1.5 bg-blue-500/10 text-blue-300 rounded-full text-sm font-semibold border border-blue-500/30">ML Pipelines</span>
-              </div>
-            </motion.div>
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-6">
+          <div>
+            <p className="section-label mb-3">04 — Certifications</p>
+            <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.02em] text-foreground">
+              Credentials
+            </h2>
           </div>
         </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {CERTS.map((c, i) => {
+            const inner = (
+              <>
+                <div className="flex items-center justify-center rounded-lg border border-foreground/10 bg-card/60 p-3">
+                  <img
+                    src={c.badge}
+                    alt={`${c.issuer} ${c.title} badge`}
+                    className="h-20 w-20 object-contain sm:h-24 sm:w-24"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                    {c.issuer}
+                  </p>
+                  <h3 className="mt-1 font-display text-xl font-normal tracking-tight text-foreground sm:text-2xl">
+                    {c.title}
+                  </h3>
+                  <p className="mt-1 font-mono text-xs text-muted-foreground">{c.meta}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {c.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-foreground/12 px-3 py-1 font-mono text-[11px] tracking-wide text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </>
+            );
+
+            const className =
+              "flex flex-col gap-6 rounded-xl border border-foreground/10 bg-card/40 p-7 transition-colors duration-300 hover:border-accent/40 sm:flex-row sm:items-start";
+
+            return (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: EASE, delay: i * 0.1 }}
+              >
+                {c.href ? (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div className={className}>{inner}</div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

@@ -1,207 +1,123 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { Menu, X, Github, Linkedin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
+
+const LINKS: [string, string][] = [
+  ["Work", "projects"],
+  ["Expertise", "expertise"],
+  ["Résumé", "resume"],
+  ["Contact", "contact"],
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/80 backdrop-blur-md border-b border-cyan-500/20 shadow-lg'
-          : 'bg-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+      className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
+      <div
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between px-6 transition-all duration-300 md:px-10 ${
+          isScrolled ? "glass mt-3 rounded-full md:mx-6 lg:mx-auto lg:max-w-5xl" : ""
+        }`}
+      >
+        {/* Brand — display serif mark */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="font-display text-lg tracking-tight text-foreground transition-opacity hover:opacity-70"
+        >
+          Shubham<span className="text-accent">.</span>
+        </button>
+
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-8 md:flex">
+          {LINKS.map(([label, id]) => (
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent hover:from-cyan-300 hover:to-purple-300 transition-all"
+              key={id}
+              onClick={() => scrollToSection(id)}
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              Shubham Singh
+              {label}
             </button>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {['Home', 'Skills', 'Expertise', 'Projects', 'Education', 'Experience', 'Resume', 'Contact'].map((item, index) => (
-              <motion.button
-                key={item}
-                onClick={() => item === 'Home' ? window.scrollTo({ top: 0, behavior: 'smooth' }) : scrollToSection(item.toLowerCase())}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors relative"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {item}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Social Links */}
-          <div className="hidden md:flex items-center space-x-4">
-            <motion.a
-              href="https://github.com/code-sharingan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-100 hover:text-cyan-400 transition-colors"
-              whileHover={{ scale: 1.2, rotate: 10 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Github className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com/in/shubhamanilsingh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-100 hover:text-cyan-400 transition-colors"
-              whileHover={{ scale: 1.2, rotate: -10 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Linkedin className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="mailto:shub.ss@outlook.com"
-              className="text-cyan-100 hover:text-cyan-400 transition-colors"
-              whileHover={{ scale: 1.2, y: -3 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Mail className="w-5 h-5" />
-            </motion.a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-cyan-100 hover:text-cyan-400 transition-colors"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              className="md:hidden bg-black/95 backdrop-blur-md border-t border-cyan-500/20 py-4"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-            <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  setIsMobileMenuOpen(false);
-                }}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection('skills')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection('expertise')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Expertise
-              </button>
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection('education')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Education
-              </button>
-              <button
-                onClick={() => scrollToSection('experience')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Experience
-              </button>
-              <button
-                onClick={() => scrollToSection('resume')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Resume
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-cyan-100 hover:text-cyan-400 transition-colors text-left px-4"
-              >
-                Contact
-              </button>
+        {/* Right: socials + theme */}
+        <div className="hidden items-center gap-4 md:flex">
+          <a
+            href="https://github.com/code-sharingan"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="GitHub"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <a
+            href="https://linkedin.com/in/shubhamanilsingh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <ThemeToggle />
+        </div>
 
-              {/* Mobile Social Links */}
-              <div className="flex items-center space-x-4 px-4 pt-2 border-t border-cyan-500/20">
-                <a
-                  href="https://github.com/code-sharingan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-100 hover:text-cyan-400 transition-colors"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/shubhamanilsingh"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-100 hover:text-cyan-400 transition-colors"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href="mailto:shub.ss@outlook.com"
-                  className="text-cyan-100 hover:text-cyan-400 transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Mobile controls */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileMenuOpen((v) => !v)}
+            className="text-foreground"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="glass mx-4 mt-2 rounded-2xl px-6 py-5 md:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex flex-col gap-4">
+              {LINKS.map(([label, id]) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className="text-left font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
