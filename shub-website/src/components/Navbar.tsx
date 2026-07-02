@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS: [string, string][] = [
-  ["Work", "projects"],
   ["Expertise", "expertise"],
+  ["Work", "projects"],
   ["Résumé", "resume"],
   ["Contact", "contact"],
 ];

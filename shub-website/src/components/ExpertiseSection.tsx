@@ -1,38 +1,38 @@
 import { motion } from "framer-motion";
-import { Workflow, Search, Activity, Server, Users, Layout } from "lucide-react";
+import { Workflow, Cpu, Search, Activity, ShieldCheck, CloudCog } from "lucide-react";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const CAPABILITIES = [
   {
     icon: Workflow,
-    title: "LLM Agents & Agentic Workflows",
-    desc: "Multi-step agent systems with LangGraph and LangChain — routing, tool use, and retrieval — on the Anthropic and OpenAI APIs. The runtime behind client support workflows at DataPipers and the NeuralDesk platform.",
+    title: "AI Orchestration & Multi-Agent Systems",
+    desc: "Four cooperating Gemini agents running in production — orchestrated with Google ADK, speaking A2A (JSON-RPC 2.0) between independent Cloud Run microservices, with least-privilege isolation per agent and a dual-mode local/prod topology.",
+  },
+  {
+    icon: Cpu,
+    title: "AI System Design",
+    desc: "Systems that expose uncertainty instead of hiding it: two-pass classify/extract pipelines, schema-enforced structured output, per-field confidence scoring, graceful degradation, and human-in-the-loop exception queues.",
   },
   {
     icon: Search,
-    title: "Retrieval-Augmented Generation",
-    desc: "Production RAG over client knowledge bases: semantic chunking, hybrid keyword + vector search, embeddings, and vector stores (Chroma, Pinecone). Raised retrieval accuracy from 85% to 96%.",
+    title: "RAG & Retrieval Engineering",
+    desc: "Retrieval built from raw primitives, no frameworks: 768-dim embeddings, pgvector and Vertex AI Vector Search, citation-grounded generation, semantic fingerprints, and multi-turn conversational memory.",
   },
   {
     icon: Activity,
-    title: "Production & MLOps",
-    desc: "Ship and operate: Docker, CI/CD with GitHub Actions, monitoring and observability, and model evaluation. Cut LLM inference latency 12s → 8s via caching, query optimization, and an OLAP → OLTP serving migration.",
+    title: "AIOps & LLM Observability",
+    desc: "OpenTelemetry tracing across agent hops, structured logging, audit trails on every inference and scoring-weight change, production SLOs (~8s warm, p95 <20s), and 126+ automated tests guarding AI behavior through CI/CD.",
   },
   {
-    icon: Server,
-    title: "Backend & APIs",
-    desc: "Python (FastAPI), Go, and TypeScript / Node.js services — async (asyncio), REST, and WebSockets. Architected a 15+ table PostgreSQL schema with sub-100ms queries.",
+    icon: ShieldCheck,
+    title: "AI Safety & Guardrails",
+    desc: "Guardrails where hallucination has clinical consequences: structured dose-assessment enums, numeric range validation, zero-data-loss failure semantics. LLM output is untrusted by default — reliability is engineered around it.",
   },
   {
-    icon: Users,
-    title: "Forward-Deployed Delivery",
-    desc: "Own the client relationship end-to-end — discovery calls, requirement gathering, and live debugging in production — leading weekly syncs as the primary technical point of contact.",
-  },
-  {
-    icon: Layout,
-    title: "Frontend for AI",
-    desc: "React interfaces for agent interactions, delivering real-time streaming responses and a clean user experience across client deployments.",
+    icon: CloudCog,
+    title: "Self-Improving Feedback Loops",
+    desc: "AI that learns from its humans: alignment agents trained on editor approve/reject decisions, continuously re-weighted scoring with a full audit trail — plus the Terraform-provisioned GCP platform it all runs on.",
   },
 ];
 
@@ -42,7 +42,7 @@ const ExpertiseSection = () => {
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-6">
           <div>
-            <p className="section-label mb-3">02 — Capabilities</p>
+            <p className="section-label mb-3">01 — Capabilities</p>
             <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.02em] text-foreground">
               What I do
             </h2>

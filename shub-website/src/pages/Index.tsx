@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
 import ExpertiseSection from "@/components/ExpertiseSection";
@@ -16,11 +17,19 @@ const reveal = {
 };
 
 const STACK: [string, string[]][] = [
-  ["AI & LLMs", ["Anthropic", "OpenAI", "AI Agents", "Agentic Workflows", "RAG", "Prompt Engineering", "Tool Use", "LangChain", "LangGraph"]],
-  ["Languages", ["Python", "TypeScript", "JavaScript", "Go", "SQL"]],
-  ["Web & APIs", ["React", "FastAPI", "Node.js", "REST", "WebSockets", "asyncio"]],
-  ["Data & Retrieval", ["Chroma", "Pinecone", "Embeddings", "Semantic Search", "PostgreSQL", "Redis", "MongoDB"]],
-  ["Infra & MLOps", ["Docker", "CI/CD", "GitHub Actions", "AWS", "Monitoring", "Model Eval"]],
+  ["AI / ML", ["Vertex AI Gemini", "Multi-Agent Systems (Google ADK)", "ResponseSchema", "Structured Output", "RAG", "Vertex AI Vector Search", "768-dim Embeddings", "pgvector Search", "Confidence Gating", "Conversational Memory"]],
+  ["Languages", ["Go", "Python", "SQL", "TypeScript"]],
+  ["Cloud & Infra", ["Cloud Run", "Cloud SQL", "BigQuery", "Firestore", "Pub/Sub", "Cloud Storage", "Secret Manager", "Artifact Registry", "Terraform", "Cloud Build", "GitHub Actions", "OpenTelemetry", "Distroless Docker"]],
+  ["Security", ["Postgres RLS", "JWT / JWKS", "bcrypt", "RBAC", "Rate Limiting", "AES-256-GCM", "HMAC CSRF", "Key Rotation", "Workload Identity Federation"]],
+  ["APIs & Protocols", ["REST (Gorilla Mux · FastAPI)", "JSON-RPC 2.0 (A2A)", "WebSocket Streaming", "OAuth (Gmail)"]],
+];
+
+const PRINCIPLES = [
+  "Schema-enforced output",
+  "Confidence gating",
+  "Human-in-the-loop",
+  "Audit trails",
+  "Self-improving loops",
 ];
 
 const COURSEWORK = [
@@ -68,15 +77,58 @@ const SectionHeader = ({ index, title }: { index: string; title: string }) => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <ScrollProgress />
       <Navbar />
 
       <Hero />
 
-      {/* 01 — Work */}
-      <WorkSection />
+      {/* Interstitial — The through-line */}
+      <section className="relative overflow-hidden border-t border-foreground/10 bg-background py-28 md:py-36">
+        <div className="hero-mesh opacity-50" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
+          <motion.p className="section-label mb-8" {...reveal}>
+            The through-line
+          </motion.p>
+          <h2 className="max-w-4xl font-display text-[clamp(2rem,5.5vw,4rem)] font-light leading-[1.08] tracking-[-0.02em] text-foreground">
+            <motion.span
+              className="block"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.7, ease: EASE }}
+            >
+              LLM output is <em className="font-normal italic text-muted-foreground">untrusted.</em>
+            </motion.span>
+            <motion.span
+              className="block"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
+            >
+              Reliability is <em className="font-normal italic text-accent">engineered</em> around it.
+            </motion.span>
+          </h2>
+          <motion.div
+            className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3"
+            {...reveal}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.35 }}
+          >
+            {PRINCIPLES.map((p, i) => (
+              <span key={p} className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                {i > 0 && <span className="h-px w-6 bg-accent/50" aria-hidden="true" />}
+                {p}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-      {/* 02 — Capabilities */}
+      {/* 01 — Capabilities */}
       <ExpertiseSection />
+
+      {/* 02 — Work */}
+      <WorkSection />
 
       {/* 03 — Stack */}
       <section id="skills" className="border-t border-foreground/10 bg-background py-24 md:py-32">

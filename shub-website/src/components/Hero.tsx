@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import NodeField from "./NodeField";
 
@@ -10,23 +11,51 @@ const rise = (delay: number) => ({
   transition: { duration: 0.8, delay, ease: EASE },
 });
 
+/* word-by-word masked rise + blur-in for the headline */
+const wordRise = (i: number) => ({
+  initial: { opacity: 0, y: "0.55em", filter: "blur(8px)" },
+  animate: { opacity: 1, y: "0em", filter: "blur(0px)" },
+  transition: { duration: 0.7, delay: 0.1 + i * 0.07, ease: EASE },
+});
+
+const LINE_ONE = ["I", "build", "AI", "systems"];
+const LINE_TWO = ["that", "make", "it", "to"];
+
 const SYSTEMS: [string, string][] = [
-  ["agent-runtime", "live"],
-  ["rag-retrieval", "live"],
-  ["streaming-api", "live"],
+  ["dictation-engine", "live"],
+  ["docstream-rag", "live"],
+  ["classify-extract", "live"],
+  ["list-curator-a2a", "live"],
 ];
 
 const Hero = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  // scroll-linked parallax: background drifts down, content lifts and fades as you scroll away
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const fgY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const fgOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.2]);
+
   return (
     <section
+      ref={heroRef}
       id="home"
       className="relative flex min-h-screen w-full items-center overflow-hidden bg-background"
     >
-      <div className="hero-mesh" aria-hidden="true" />
-      <NodeField className="absolute inset-0 h-full w-full opacity-70" />
+      <motion.div className="absolute inset-0" style={{ y: bgY }} aria-hidden="true">
+        <div className="hero-mesh" />
+        <NodeField className="absolute inset-0 h-full w-full opacity-70" />
+      </motion.div>
       <div className="grain-overlay" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-20 pt-32 md:px-10">
+      <motion.div
+        className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-20 pt-32 md:px-10"
+        style={{ y: fgY, opacity: fgOpacity }}
+      >
         {/* top hairline label row — editorial / printed-contents motif */}
         <motion.div
           {...rise(0)}
@@ -49,26 +78,44 @@ const Hero = () => {
               Forward Deployed AI Engineer
             </motion.p>
 
-            <motion.h1
-              {...rise(0.12)}
-              className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-light leading-[0.98] tracking-[-0.02em] text-foreground"
-            >
-              I build AI systems
+            <h1 className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-light leading-[0.98] tracking-[-0.02em] text-foreground">
+              {LINE_ONE.map((w, i) => (
+                <motion.span key={`l1-${i}`} className="inline-block" {...wordRise(i)}>
+                  {w}
+                  {i < LINE_ONE.length - 1 && <>&nbsp;</>}
+                </motion.span>
+              ))}
               <br />
-              that make it to{" "}
-              <em className="font-normal italic text-accent">production.</em>
-            </motion.h1>
+              {LINE_TWO.map((w, i) => (
+                <motion.span
+                  key={`l2-${i}`}
+                  className="inline-block"
+                  {...wordRise(LINE_ONE.length + i)}
+                >
+                  {w}&nbsp;
+                </motion.span>
+              ))}
+              <motion.em
+                className="inline-block font-normal italic text-accent"
+                {...wordRise(LINE_ONE.length + LINE_TWO.length)}
+              >
+                production.
+              </motion.em>
+            </h1>
 
             <motion.p
-              {...rise(0.2)}
+              {...rise(0.55)}
               className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground"
             >
-              I own the full lifecycle of client-facing LLM agents — from discovery
-              and prototyping through deployment and live debugging in production.
+              Three production AI systems on Google Cloud — multi-agent
+              orchestration, retrieval-grounded generation, and clinical-grade
+              guardrails. I treat LLM output as untrusted and engineer the
+              reliability around it: schema-enforced output, confidence gating,
+              and self-improving human feedback loops.
             </motion.p>
 
             <motion.div
-              {...rise(0.28)}
+              {...rise(0.68)}
               className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4"
             >
               <a href="#projects" className="btn-solid">
@@ -103,39 +150,46 @@ const Hero = () => {
           </div>
 
           {/* glass "system status" card — the one glass moment, breaking the grid */}
-          <motion.aside {...rise(0.42)} className="lg:col-span-4 lg:mt-24">
+          <motion.aside {...rise(0.8)} className="lg:col-span-4 lg:mt-24">
             <div className="glass rounded-xl p-5 font-mono text-xs">
               <div className="mb-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                 <span>System · Status</span>
                 <span className="status-dot" />
               </div>
               <ul className="space-y-2.5 text-muted-foreground">
-                {SYSTEMS.map(([name, state]) => (
-                  <li key={name} className="flex items-center justify-between">
+                {SYSTEMS.map(([name, state], i) => (
+                  <motion.li
+                    key={name}
+                    className="flex items-center justify-between"
+                    {...rise(0.95 + i * 0.1)}
+                  >
                     <span className="text-foreground/80">{name}</span>
                     <span className="flex items-center gap-1.5 text-accent">
                       <span className="status-dot" />
                       {state}
                     </span>
-                  </li>
+                  </motion.li>
                 ))}
-                <li className="flex items-center justify-between border-t border-foreground/10 pt-2.5">
-                  <span>retrieval acc.</span>
-                  <span className="text-foreground/80">96%</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span>inference p95</span>
-                  <span className="text-foreground/80">8.0&nbsp;s</span>
-                </li>
+                <motion.li
+                  className="flex items-center justify-between border-t border-foreground/10 pt-2.5"
+                  {...rise(1.42)}
+                >
+                  <span>test suites</span>
+                  <span className="text-foreground/80">126+ passing</span>
+                </motion.li>
+                <motion.li className="flex items-center justify-between" {...rise(1.52)}>
+                  <span>warm · p95</span>
+                  <span className="text-foreground/80">~8s · &lt;20s</span>
+                </motion.li>
               </ul>
             </div>
           </motion.aside>
         </div>
-      </div>
+      </motion.div>
 
       <motion.a
         href="#projects"
-        {...rise(0.6)}
+        {...rise(1.0)}
         aria-label="Scroll to work"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground transition-colors hover:text-foreground"
       >
